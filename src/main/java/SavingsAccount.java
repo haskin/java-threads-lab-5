@@ -7,12 +7,13 @@ public class SavingsAccount {
 	private long total = 0;
 
 	public boolean withdraw(long amount) {
-		if (amount > total || amount < 0)
-			return false;
 		while (lock.isLocked()) {
 		}
 		lock.lock();
 		try {
+			if (amount > total || amount < 0)
+				return false;
+
 			total = total - amount;
 			return true;
 		} catch (Exception e) {
